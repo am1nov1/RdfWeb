@@ -11,6 +11,8 @@ import com.hp.hpl.jena.rdf.model.StmtIterator
 import java.io._
 import play.api._
 import play.api.mvc._
+import scala.collection.JavaConversions._
+
 
 object Application extends Controller {
 
@@ -24,11 +26,8 @@ object Application extends Controller {
     def index = Action {
         val string_builder = new StringBuilder()
 
-        val objects = model.listObjects()
-
         // Iterate over all RDF objects.
-        while ( objects.hasNext() ) {
-            val o : RDFNode = objects.next();
+        for ( o <- model.listObjects() ) {
             string_builder ++= o.toString()
         }
 
