@@ -10,25 +10,33 @@ import com.hp.hpl.jena.rdf.model.Statement
 import com.hp.hpl.jena.rdf.model.StmtIterator
 import java.io._
 import scala.collection.JavaConversions._
+import scala.collection.mutable.MutableList
 
+/**
+ * A facade around the RDF triplestore
+ */
 object Triplestore {
 
-  // TODO: Get the RDF files from somewhere.
+  // TODO: Get the RDF files from somewhere. Assets?
   val rdf_file_input_stream = new FileInputStream("/Users/lenny/Code/GitHub/Rdf/public.ttl")
 
-  // Create the model and load the RDF files.
+  // Create the RDF model and load the RDF files.
   val model = ModelFactory.createDefaultModel()
   model.read(rdf_file_input_stream, null, "TTL")
 
-  def objects {
+  /**
+   * Returns a list of all RDF objects.
+   */
+  def objects(): List[String] = {
 
-    val string_builder = new StringBuilder()
+    val objects: MutableList[String] = new MutableList
 
     // Iterate over all RDF objects.
     for (o <- model.listObjects()) {
-      string_builder ++= o.toString()
+      objects += o.toString()
     }
 
+    objects.toList
   }
 
 }
