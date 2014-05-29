@@ -13,26 +13,35 @@ import play.api._
 import play.api.mvc._
 import scala.collection.JavaConversions._
 
-
 object Application extends Controller {
 
-    // TODO: Get the RDF files from somewhere.
-    val rdf_file_input_stream = new FileInputStream("/Users/lenny/Code/GitHub/Rdf/public.ttl")
+  // TODO: Get the RDF files from somewhere.
+  val rdf_file_input_stream = new FileInputStream("/Users/lenny/Code/GitHub/Rdf/public.ttl")
 
-    // Create the model and load the RDF files.
-    val model = ModelFactory.createDefaultModel()
-    model.read(rdf_file_input_stream, null, "TTL")
+  // Create the model and load the RDF files.
+  val model = ModelFactory.createDefaultModel()
+  model.read(rdf_file_input_stream, null, "TTL")
 
-    def index = Action {
-        val string_builder = new StringBuilder()
+  def index = Action {
 
-        // Iterate over all RDF objects.
-        for ( o <- model.listObjects() ) {
-            string_builder ++= o.toString()
-        }
+    //Ok(views.html.index(string_builder.toString()))
+    Ok("TODO")
+  }
 
-        //Ok(views.html.index(string_builder.toString()))
-        Ok(string_builder.toString())
+  def objects = Action {
+
+    val string_builder = new StringBuilder()
+
+    // Iterate over all RDF objects.
+    for (o <- model.listObjects()) {
+      string_builder ++= o.toString()
     }
 
+    //Ok(views.html.index(string_builder.toString()))
+    Ok(string_builder.toString())
+  }
+
+  def predicates = TODO
+
+  def subjects = TODO
 }
