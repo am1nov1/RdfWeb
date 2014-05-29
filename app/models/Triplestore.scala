@@ -20,8 +20,13 @@ object Triplestore {
   // TODO: Get the RDF files from somewhere. Assets?
   val rdf_file_input_stream = new FileInputStream("/Users/lenny/Code/GitHub/Rdf/public.ttl")
 
-  // Create the RDF model and load the RDF files.
-  val model = ModelFactory.createDefaultModel()
+  /**
+   * The Apache Jena RDF model.
+   * @see <http://jena.apache.org/documentation/javadoc/jena/com/hp/hpl/jena/rdf/model/Model.html>
+   */
+  val model: Model = ModelFactory.createDefaultModel()
+
+  // Read the RDF files.
   model.read(rdf_file_input_stream, null, "TTL")
 
   /**
@@ -37,6 +42,38 @@ object Triplestore {
     }
 
     objects.toList
+  }
+
+  /**
+   * Returns a list of all RDF predicates.
+   */
+  /*
+  def predicates(): List[String] = {
+
+    val predicates: MutableList[String] = new MutableList
+
+    // Iterate over all RDF objects.
+    for (o <- model.listPredicates()) {
+      predicates += o.toString()
+    }
+
+    predicates.toList
+  }
+  */
+
+  /**
+   * Returns a list of all RDF subjects.
+   */
+  def subjects(): List[String] = {
+
+    val subjects: MutableList[String] = new MutableList
+
+    // Iterate over all RDF objects.
+    for (o <- model.listSubjects()) {
+      subjects += o.toString()
+    }
+
+    subjects.toList
   }
 
 }

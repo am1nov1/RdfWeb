@@ -24,5 +24,11 @@ object Application extends Controller {
 
   def predicates = TODO
 
-  def subjects = TODO
+  def subjects = Action {
+
+    val subjects = Triplestore.subjects()
+
+    //Ok(views.html.index(string_builder.toString()))
+    Ok(subjects.mkString(", "))
+  }
 }
