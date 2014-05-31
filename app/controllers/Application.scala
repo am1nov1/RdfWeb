@@ -1,7 +1,7 @@
 package controllers
 
 import java.io._
-import models.RdfSubject
+import models.RdfSubjectDetails
 import models.RdfTriple
 import models.Triplestore
 import play.api._
@@ -25,7 +25,7 @@ object Application extends Controller {
 
     def subject(subject_id: String) = Action {
 
-        val subject = Triplestore.subject(subject_id)
+        val subject = Triplestore.subject_details(subject_id)
 
         Ok(views.html.subject(subject))
     }

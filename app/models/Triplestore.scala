@@ -76,25 +76,6 @@ object Triplestore {
     /**
      *
      */
-    def subject(subject_id: String): RdfSubject = {
-
-        // Try to select the RDF subject from the given ID.
-        val resource: Resource = model.getResource(model.expandPrefix(subject_id))
-
-        // TODO: handle `resource` null case
-
-        // Get the RDF subject label.
-        val label: String = subject_label(resource)
-
-        // Get the RDF subject description.
-        val description: String = subject_description(resource)
-
-        new RdfSubject(label, description)
-    }
-
-    /**
-     *
-     */
     def subject_description(rdf_subject: RDFNode): String = {
 
         if (rdf_subject.isLiteral())
@@ -147,6 +128,25 @@ object Triplestore {
     /**
      *
      */
+    def subject_details(subject_id: String): RdfSubjectDetails = {
+
+        // Try to select the RDF subject from the given ID.
+        val resource: Resource = model.getResource(model.expandPrefix(subject_id))
+
+        // TODO: handle `resource` null case
+
+        // Get the RDF subject label.
+        val label: String = subject_label(resource)
+
+        // Get the RDF subject description.
+        val description: String = subject_description(resource)
+
+        new RdfSubjectDetails(label, description)
+    }
+
+    /**
+     *
+     */
     def subject_label(rdf_subject: RDFNode): String = {
 
         if (rdf_subject.isLiteral())
@@ -194,6 +194,7 @@ object Triplestore {
             }
         }
 
+        // No subject label was found: use an empty string.
         ""
     }
 
