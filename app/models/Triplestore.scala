@@ -59,7 +59,10 @@ object Triplestore {
 
         // Iterate over all RDF objects.
         for (o <- model.listObjects()) {
-            objects += new RdfObject(subject_label(o))
+
+            // Only object, if it is not an RDF literals.
+            if (!o.isLiteral())
+                objects += new RdfObject(subject_label(o))
         }
 
         objects.toList
