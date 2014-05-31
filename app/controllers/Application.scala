@@ -17,7 +17,7 @@ object Application extends Controller {
 
     val objects = Triplestore.objects()
 
-    Ok(views.html.objects(objects.mkString(", ")))
+    Ok(views.html.objects(objects))
   }
 
   def predicates = TODO

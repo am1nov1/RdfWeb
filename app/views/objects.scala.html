@@ -1,7 +1,11 @@
-@(message: String)
+@(objects: Seq[String])
 
 @main("Welcome to Play") {
 
-    @message
+	<ul>
+	@for(o <- objects) {
+	  <li>@o</li>
+	}
+	</ul>
 
 }
