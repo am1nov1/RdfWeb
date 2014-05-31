@@ -13,6 +13,7 @@ import models.RdfObject
 import scala.collection.JavaConversions._
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.MutableList
+import scala.util.Sorting
 
 /**
  * A facade around the RDF triplestore
@@ -67,7 +68,9 @@ object Triplestore {
                 objects += new RdfObject(subject_short_uri(o), subject_label(o))
         }
 
-        objects.toList
+        val objects_array = objects.toArray
+        Sorting.quickSort(objects_array)(RdfObjectOrderingByLabel)
+        objects_array
     }
 
     /**
@@ -191,7 +194,7 @@ object Triplestore {
             }
         }
 
-        null
+        ""
     }
 
     /**
