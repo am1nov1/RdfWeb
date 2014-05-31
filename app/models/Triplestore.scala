@@ -62,7 +62,7 @@ object Triplestore {
 
             // Only object, if it is not an RDF literals.
             if (!o.isLiteral())
-                objects += new RdfObject("TODO", subject_label(o))
+                objects += new RdfObject(subject_short_uri(o), subject_label(o))
         }
 
         objects.toList
@@ -137,6 +137,16 @@ object Triplestore {
         }
 
         resource.getLocalName()
+    }
+
+    /**
+     *
+     */
+    def subject_short_uri(rdf_subject: RDFNode): String = {
+        val resource: Resource = rdf_subject.asResource()
+        val model: Model = rdf_subject.getModel()
+
+        model.shortForm(resource.getURI());
     }
 
     /**

@@ -1,7 +1,7 @@
 package controllers
 
 import java.io._
-import models.Triple
+import models.RdfTriple
 import models.Triplestore
 import play.api._
 import play.api.mvc._
