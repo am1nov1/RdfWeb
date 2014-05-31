@@ -3,6 +3,6 @@ package models
 /**
  * A facade around a RDF subject.
  */
-class Object {
-  var label: String = _
+class RdfObject(l: String) {
+  var label: String = l
 }

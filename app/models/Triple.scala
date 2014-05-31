@@ -3,8 +3,8 @@ package models
 /**
  * A facade around an RDF triple.
  */
-class Triple(s: String, p: String, o: String) {
-  var this.s: String = s
-  var this.p: String = p
-  var this.o: String = o
+class Triple(subj: String, pred: String, obj: String) {
+  var s: String = subj
+  var p: String = pred
+  var o: String = obj
 }

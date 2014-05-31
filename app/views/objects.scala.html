@@ -1,10 +1,10 @@
-@(objects: Seq[String])
+@(objects: Seq[RdfObject])
 
 @main("Welcome to Play") {
 
 	<ul>
 	@for(o <- objects) {
-	  <li>@o</li>
+	  <li>@o.label</li>
 	}
 	</ul>
 

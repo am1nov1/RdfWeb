@@ -9,6 +9,7 @@ import com.hp.hpl.jena.rdf.model.Resource
 import com.hp.hpl.jena.rdf.model.Statement
 import com.hp.hpl.jena.rdf.model.StmtIterator
 import java.io._
+import models.RdfObject
 import scala.collection.JavaConversions._
 import scala.collection.mutable.MutableList
 
@@ -32,13 +33,13 @@ object Triplestore {
   /**
    * Returns a list of all RDF objects.
    */
-  def objects(): Seq[String] = {
+  def objects(): Seq[RdfObject] = {
 
-    val objects: MutableList[String] = new MutableList
+    val objects: MutableList[RdfObject] = new MutableList
 
     // Iterate over all RDF objects.
     for (o <- model.listObjects()) {
-      objects += o.toString()
+      objects += new RdfObject(o.toString())
     }
 
     objects.toList
