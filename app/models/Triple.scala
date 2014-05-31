@@ -3,8 +3,8 @@ package models
 /**
  * A facade around an RDF triple.
  */
-abstract class Triple {
-  val s: String
-  val p: String
-  val o: String
+class Triple {
+  var s: String = _
+  var p: String = _
+  var o: String = _
 }

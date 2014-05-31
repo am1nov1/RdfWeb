@@ -32,7 +32,7 @@ object Triplestore {
   /**
    * Returns a list of all RDF objects.
    */
-  def objects(): List[String] = {
+  def objects(): Seq[String] = {
 
     val objects: MutableList[String] = new MutableList
 
@@ -64,7 +64,7 @@ object Triplestore {
   /**
    * Returns a list of all RDF subjects.
    */
-  def subjects(): List[String] = {
+  def subjects(): Seq[String] = {
 
     val subjects: MutableList[String] = new MutableList
 

@@ -10,16 +10,14 @@ object Application extends Controller {
 
   def index = Action {
 
-    //Ok(views.html.index(string_builder.toString()))
-    Ok("TODO")
+    Ok(views.html.index())
   }
 
   def objects = Action {
 
     val objects = Triplestore.objects()
 
-    //Ok(views.html.index(string_builder.toString()))
-    Ok(objects.mkString(", "))
+    Ok(views.html.objects(objects.mkString(", ")))
   }
 
   def predicates = TODO
@@ -28,7 +26,6 @@ object Application extends Controller {
 
     val subjects = Triplestore.subjects()
 
-    //Ok(views.html.index(string_builder.toString()))
-    Ok(subjects.mkString(", "))
+    Ok(views.html.subjects(subjects.mkString(", ")))
   }
 }
