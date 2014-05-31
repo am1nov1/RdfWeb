@@ -1,6 +1,7 @@
 package controllers
 
 import java.io._
+import models.RdfSubject
 import models.RdfTriple
 import models.Triplestore
 import play.api._
@@ -22,7 +23,12 @@ object Application extends Controller {
 
     def predicates = TODO
 
-    def subject(id: String) = TODO
+    def subject(subject_id: String) = Action {
+
+        val subject = Triplestore.subject(subject_id)
+
+        Ok(views.html.subject(subject))
+    }
 
     def subjects = Action {
 

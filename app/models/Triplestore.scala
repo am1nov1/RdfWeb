@@ -25,6 +25,8 @@ object Triplestore {
      */
     val model: Model = ModelFactory.createDefaultModel()
 
+    val languages = Seq("de", "", null, "en", "fr", "it", "es", "jp")
+
     val FOAF: String = "http://xmlns.com/foaf/0.1/"
     val GEO: String = "http://www.w3.org/2003/01/geo/wgs84_pos#"
     val SCHEMA: String = "http://schema.org/"
@@ -69,34 +71,31 @@ object Triplestore {
     }
 
     /**
-     * Returns a list of all RDF predicates.
+     *
      */
-    /*
-  def predicates(): List[String] = {
+    def subject(subject_id: String): RdfSubject = {
 
-    val predicates: MutableList[String] = new MutableList
+        // TODO: Try to select the RDF subject from the ID.
 
-    // Iterate over all RDF objects.
-    for (o <- model.listPredicates()) {
-      predicates += o.toString()
+        // TODO: Get the label.
+        // val label : String = subject_label(rdf_subject)
+
+        // TODO: Get the description.
+        // val description : String = subject_description(rdf_subject)
+
+        new RdfSubject("TODO: Triplestore.subject()", "TODO: description")
     }
-
-    predicates.toList
-  }
-  */
 
     /**
      *
      */
-    def subject_label(rdf_subject: RDFNode): String = {
+    def subject_description(rdf_subject: RDFNode): String = {
 
         if (rdf_subject.isLiteral())
             return rdf_subject.asLiteral().toString();
 
-        val languages = Seq("de", "", null, "en", "fr", "it", "es", "jp")
-        val properties = Seq(SCHEMA_NAME,
-            SCHEMA_ALTERNATE_NAME, SKOS_PREFLABEL,
-            SKOS_ALTLABEL)
+        val properties = Seq(SCHEMA_DESCRIPTION,
+            SKOS_NOTE)
 
         val resource: Resource = rdf_subject.asResource()
 
@@ -137,6 +136,59 @@ object Triplestore {
         }
 
         resource.getLocalName()
+    }
+
+    /**
+     *
+     */
+    def subject_label(rdf_subject: RDFNode): String = {
+
+        if (rdf_subject.isLiteral())
+            return rdf_subject.asLiteral().toString();
+
+        val properties = Seq(SCHEMA_NAME,
+            SCHEMA_ALTERNATE_NAME, SKOS_PREFLABEL,
+            SKOS_ALTLABEL)
+
+        val resource: Resource = rdf_subject.asResource()
+
+        for (property <- properties) {
+
+            // Get an iterator over the RDF statements where the current RDF
+            // subject has the current RDF description property.
+            val rdf_statement_iterator: StmtIterator = resource
+                .listProperties(property)
+
+            val description_per_language: HashMap[String, String] = new HashMap()
+
+            for (rdf_statement <- rdf_statement_iterator) {
+
+                // Get the RDF statement's RDF object.
+                val rdf_object: RDFNode = rdf_statement.getObject()
+
+                // The RDF object is an RDF literal.
+                if (rdf_object.isLiteral()) {
+
+                    // Add the literal per language.
+                    val literal: Literal = rdf_object.asLiteral()
+
+                    description_per_language.put(literal.getLanguage(),
+                        literal.getString())
+                }
+            }
+
+            // Iterate over the preferred languages.
+            for (language <- languages) {
+
+                val maybe_description: Option[String] = description_per_language.get(language)
+
+                for (description <- maybe_description) {
+                    return description;
+                }
+            }
+        }
+
+        null
     }
 
     /**
