@@ -75,15 +75,18 @@ object Triplestore {
      */
     def subject(subject_id: String): RdfSubject = {
 
-        // TODO: Try to select the RDF subject from the ID.
+        // Try to select the RDF subject from the given ID.
+        val resource: Resource = model.getResource(model.expandPrefix(subject_id))
 
-        // TODO: Get the label.
-        // val label : String = subject_label(rdf_subject)
+        // TODO: handle `resource` null case
 
-        // TODO: Get the description.
-        // val description : String = subject_description(rdf_subject)
+        // Get the RDF subject label.
+        val label: String = subject_label(resource)
 
-        new RdfSubject("TODO: Triplestore.subject()", "TODO: description")
+        // Get the RDF subject description.
+        val description: String = subject_description(resource)
+
+        new RdfSubject(label, description)
     }
 
     /**
@@ -135,7 +138,7 @@ object Triplestore {
             }
         }
 
-        resource.getLocalName()
+        null
     }
 
     /**
