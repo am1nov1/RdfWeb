@@ -5,6 +5,7 @@
 GET     /                           controllers.Application.index
 GET     /objects/                   controllers.Application.objects
 GET     /predicates/                controllers.Application.predicates
+GET     /subject/:id                controllers.Application.subject(id: String)
 GET     /subjects/                  controllers.Application.subjects
 
 # Map static resources from the /public folder to the /assets URL path

@@ -62,7 +62,7 @@ object Triplestore {
 
             // Only object, if it is not an RDF literals.
             if (!o.isLiteral())
-                objects += new RdfObject(subject_label(o))
+                objects += new RdfObject("TODO", subject_label(o))
         }
 
         objects.toList

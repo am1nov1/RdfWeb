@@ -2,10 +2,8 @@
 
 @main("Objects") {
 
-	<ul>
 	@for(o <- objects) {
-	  <li>@o.label</li>
+	  <a href="/subject/@o.id">@o.label</a> 
 	}
-	</ul>
 
 }

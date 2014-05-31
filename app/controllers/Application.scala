@@ -8,24 +8,26 @@ import play.api.mvc._
 
 object Application extends Controller {
 
-  def index = Action {
+    def index = Action {
 
-    Ok(views.html.index())
-  }
+        Ok(views.html.index())
+    }
 
-  def objects = Action {
+    def objects = Action {
 
-    val objects = Triplestore.objects()
+        val objects = Triplestore.objects()
 
-    Ok(views.html.objects(objects))
-  }
+        Ok(views.html.objects(objects))
+    }
 
-  def predicates = TODO
+    def predicates = TODO
 
-  def subjects = Action {
+    def subject(id: String) = TODO
 
-    val subjects = Triplestore.subjects()
+    def subjects = Action {
 
-    Ok(views.html.subjects(subjects.mkString(", ")))
-  }
+        val subjects = Triplestore.subjects()
+
+        Ok(views.html.subjects(subjects.mkString(", ")))
+    }
 }
