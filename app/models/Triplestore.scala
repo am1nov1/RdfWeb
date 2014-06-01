@@ -6,10 +6,11 @@ import com.hp.hpl.jena.rdf.model.ModelFactory
 import com.hp.hpl.jena.rdf.model.Property
 import com.hp.hpl.jena.rdf.model.RDFNode
 import com.hp.hpl.jena.rdf.model.Resource
+import com.hp.hpl.jena.rdf.model.Selector;
+import com.hp.hpl.jena.rdf.model.SimpleSelector;
 import com.hp.hpl.jena.rdf.model.Statement
 import com.hp.hpl.jena.rdf.model.StmtIterator
 import java.io._
-import models.RdfObject
 import scala.collection.JavaConversions._
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.MutableList
@@ -135,13 +136,31 @@ object Triplestore {
 
         // TODO: handle `resource` null case
 
-        // Get the RDF subject label.
+        // Get the RDF subject label and description.
         val label: String = subject_label(resource)
-
-        // Get the RDF subject description.
         val description: String = subject_description(resource)
 
-        new RdfSubjectDetails(subject_id, label, description)
+        // Collect the outgoing triples.
+        val outgoing_triples: MutableList[RdfTriple] = new MutableList
+
+        // Select all outgoing RDF statements for the RDF subject.
+        //val outgoing_selector: Selector = new SimpleSelector(resource, null, null)
+
+        /*
+        val outgoing_statement_iterator: StmtIterator = model.listStatements(outgoing_selector)
+
+        // Iterate over all outoging RDF statements.
+        for (outgoing_statement <- outgoing_statement_iterator) {
+            val rdf_predicate : Property = rdf_statement.getPredicate()
+            val rdf_object : RDFNode = rdf_statement.getObject()
+            val triple : RdfTriple = new 
+            outgoing_triples += o.toString()
+        }
+        */
+
+        val incoming_triples: Seq[RdfTriple] = Seq()
+
+        new RdfSubjectDetails(subject_id, label, description, outgoing_triples.toList, incoming_triples)
     }
 
     /**

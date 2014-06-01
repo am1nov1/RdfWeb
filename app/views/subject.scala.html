@@ -7,5 +7,9 @@
     
     <h3>Outgoing</h3>
     
+    @for(t <- subject.outgoing_triples) {
+    	<b>@t.predicate_id</b>: @t.object_label<br/>
+    }
+    
     <h3>Incoming</h3>
 }
