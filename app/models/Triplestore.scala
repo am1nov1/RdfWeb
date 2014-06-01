@@ -144,19 +144,23 @@ object Triplestore {
         val outgoing_triples: MutableList[RdfTriple] = new MutableList
 
         // Select all outgoing RDF statements for the RDF subject.
-        //val outgoing_selector: Selector = new SimpleSelector(resource, null, null)
+        val outgoing_selector: Selector = new SimpleSelector(resource, null, null.asInstanceOf[Object])
 
-        /*
         val outgoing_statement_iterator: StmtIterator = model.listStatements(outgoing_selector)
 
-        // Iterate over all outoging RDF statements.
+        // Iterate over the outgoing RDF statements.
         for (outgoing_statement <- outgoing_statement_iterator) {
-            val rdf_predicate : Property = rdf_statement.getPredicate()
-            val rdf_object : RDFNode = rdf_statement.getObject()
-            val triple : RdfTriple = new 
-            outgoing_triples += o.toString()
+            val rdf_predicate: Property = outgoing_statement.getPredicate()
+            val rdf_object: RDFNode = outgoing_statement.getObject()
+
+            val predicate_id: String = subject_short_uri(rdf_predicate)
+            // TODO: "subject_short_uri" gives a "ResourceRequiredException"
+            val object_id: String = "" //subject_short_uri(rdf_object)
+            val object_label: String = subject_label(rdf_object)
+            val triple: RdfTriple = new RdfTriple(subject_id, predicate_id, object_id, object_label)
+
+            outgoing_triples += triple
         }
-        */
 
         val incoming_triples: Seq[RdfTriple] = Seq()
 
