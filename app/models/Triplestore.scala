@@ -141,7 +141,7 @@ object Triplestore {
         // Get the RDF subject description.
         val description: String = subject_description(resource)
 
-        new RdfSubjectDetails(label, description)
+        new RdfSubjectDetails(subject_id, label, description)
     }
 
     /**

@@ -1,9 +1,10 @@
 package models
 
 /**
- * A facade around a RDF subject details.
+ * A facade around RDF subject details.
  */
-class RdfSubjectDetails(l: String, d: String) {
-    var label: String = l
-    var description: String = d
+class RdfSubjectDetails(i: String, l: String, d: String) {
+    val id: String = i
+    val label: String = l
+    val description: String = d
 }
