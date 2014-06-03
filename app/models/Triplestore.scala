@@ -97,7 +97,7 @@ object Triplestore {
             val rdf_statement_iterator: StmtIterator = resource
                 .listProperties(property)
 
-            val label_per_language: HashMap[String, String] = new HashMap()
+            val description_per_language: HashMap[String, String] = new HashMap()
 
             for (rdf_statement <- rdf_statement_iterator) {
 
@@ -110,7 +110,7 @@ object Triplestore {
                     // Add the literal per language.
                     val literal: Literal = rdf_object.asLiteral()
 
-                    label_per_language.put(literal.getLanguage(),
+                    description_per_language.put(literal.getLanguage(),
                         literal.getString())
                 }
             }
@@ -118,10 +118,10 @@ object Triplestore {
             // Iterate over the preferred languages.
             for (language <- languages) {
 
-                val maybe_label: Option[String] = label_per_language.get(language)
+                val maybe_description: Option[String] = description_per_language.get(language)
 
-                for (label <- maybe_label) {
-                    return label;
+                for (description <- maybe_description) {
+                    return description;
                 }
             }
         }
@@ -164,9 +164,11 @@ object Triplestore {
 
             val object_label: String = subject_label(rdf_object)
 
-            val triple: RdfTriple = new RdfTriple(subject_id, predicate_id, object_id, object_label)
+            val object_label_language: String =
+                if (rdf_object.isLiteral()) { rdf_object.asLiteral().getLanguage() }
+                else { "" }
 
-            outgoing_triples += triple
+            outgoing_triples += new RdfTriple(subject_id, predicate_id, object_id, object_label, object_label_language)
         }
 
         val incoming_triples: Seq[RdfTriple] = Seq()
@@ -180,7 +182,7 @@ object Triplestore {
     def subject_label(rdf_subject: RDFNode): String = {
 
         if (rdf_subject.isLiteral())
-            return rdf_subject.asLiteral().toString();
+            return rdf_subject.asLiteral().getString();
 
         val properties = Seq(SCHEMA_NAME,
             SCHEMA_ALTERNATE_NAME, SKOS_PREFLABEL,
@@ -188,6 +190,7 @@ object Triplestore {
 
         val resource: Resource = rdf_subject.asResource()
 
+        // Iterate over all possible label RDF predicates.
         for (property <- properties) {
 
             // Get an iterator over the RDF statements where the current RDF
@@ -195,7 +198,7 @@ object Triplestore {
             val rdf_statement_iterator: StmtIterator = resource
                 .listProperties(property)
 
-            val description_per_language: HashMap[String, String] = new HashMap()
+            val label_per_language: HashMap[String, String] = new HashMap()
 
             for (rdf_statement <- rdf_statement_iterator) {
 
@@ -208,7 +211,7 @@ object Triplestore {
                     // Add the literal per language.
                     val literal: Literal = rdf_object.asLiteral()
 
-                    description_per_language.put(literal.getLanguage(),
+                    label_per_language.put(literal.getLanguage(),
                         literal.getString())
                 }
             }
@@ -216,10 +219,10 @@ object Triplestore {
             // Iterate over the preferred languages.
             for (language <- languages) {
 
-                val maybe_description: Option[String] = description_per_language.get(language)
+                val maybe_label: Option[String] = label_per_language.get(language)
 
-                for (description <- maybe_description) {
-                    return description;
+                for (label <- maybe_label) {
+                    return label;
                 }
             }
         }
