@@ -148,11 +148,11 @@ object Triplestore {
 
         // Select all outgoing RDF statements for the RDF subject.
         val outgoing_selector: Selector = new SimpleSelector(resource, null, null.asInstanceOf[Object])
-
         val outgoing_statement_iterator: StmtIterator = model.listStatements(outgoing_selector)
 
         // Iterate over the outgoing RDF statements.
         for (outgoing_statement <- outgoing_statement_iterator) {
+
             val rdf_predicate: Property = outgoing_statement.getPredicate()
             val rdf_object: RDFNode = outgoing_statement.getObject()
 
@@ -171,8 +171,34 @@ object Triplestore {
             outgoing_triples += new RdfTriple(subject_id, predicate_id, object_id, object_label, object_label_language)
         }
 
-        // TODO: create incoming triples
-        val incoming_triples: Seq[RdfTriple] = Seq()
+        // Collect the incoming triples
+        val incoming_triples: MutableList[RdfTriple] = new MutableList
+
+        // Select all incoming RDF statements for the current RDF subject.
+        val incoming_selector: Selector = new SimpleSelector(null, null, resource)
+        val incoming_statement_iterator: StmtIterator = model.listStatements(incoming_selector)
+
+        // Iterate over the incoming RDF statements.
+        for (incoming_statement <- incoming_statement_iterator) {
+
+            val rdf_predicate: Property = incoming_statement.getPredicate()
+            val rdf_incoming_subject: RDFNode = incoming_statement.getSubject()
+
+            val predicate_id: String = subject_short_uri(rdf_predicate)
+
+            val incoming_subject_id: String =
+                if (rdf_incoming_subject.isLiteral()) { "" }
+                else { subject_short_uri(rdf_incoming_subject) }
+
+            val incoming_subject_label: String = subject_label(rdf_incoming_subject)
+
+            val incoming_subject_label_language: String =
+                if (rdf_incoming_subject.isLiteral()) { rdf_incoming_subject.asLiteral().getLanguage() }
+                else { "" }
+
+            incoming_triples += new RdfTriple(subject_id, predicate_id, incoming_subject_id, incoming_subject_label, incoming_subject_label_language)
+        }
+        // TODO
 
         new RdfSubjectDetails(subject_id, label, description, outgoing_triples.toList, incoming_triples)
     }

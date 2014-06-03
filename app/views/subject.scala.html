@@ -20,4 +20,16 @@
     }
     
     <h3>Incoming</h3>
+    
+    @for( t <- subject.incoming_triples ) {
+ 
+    	<b>@t.predicate_id</b>: 
+
+    	@if( t.object_id.isEmpty ) {
+    		@t.object_label
+    	} else {
+    		<a href="/subject/@t.object_id">@t.object_label</a>
+    	}
+    	<br/>
+    }
 }
