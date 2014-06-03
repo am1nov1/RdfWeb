@@ -50,7 +50,7 @@ object Triplestore {
         + "prefLabel")
 
     // TODO: handle the case when the parameter is not defined.
-    val rdf_file_name = current.configuration.getString("rdfWeb.rdfFiles").getOrElse("")
+    val rdf_file_name = current.configuration.getString("rdfWeb.rdfFile").getOrElse("")
 
     val rdf_file_input_stream = new FileInputStream(rdf_file_name)
 
