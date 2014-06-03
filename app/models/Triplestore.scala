@@ -171,6 +171,7 @@ object Triplestore {
             outgoing_triples += new RdfTriple(subject_id, predicate_id, object_id, object_label, object_label_language)
         }
 
+        // TODO: create incoming triples
         val incoming_triples: Seq[RdfTriple] = Seq()
 
         new RdfSubjectDetails(subject_id, label, description, outgoing_triples.toList, incoming_triples)

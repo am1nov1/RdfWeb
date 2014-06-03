@@ -7,8 +7,16 @@
     
     <h3>Outgoing</h3>
     
-    @for(t <- subject.outgoing_triples) {
-    	<b>@t.predicate_id</b>: @t.object_label<br/>
+    @for( t <- subject.outgoing_triples ) {
+ 
+    	<b>@t.predicate_id</b>: 
+
+    	@if( t.object_id.isEmpty ) {
+    		@t.object_label
+    	} else {
+    		<a href="/subject/@t.object_id">@t.object_label</a>
+    	}
+    	<br/>
     }
     
     <h3>Incoming</h3>
