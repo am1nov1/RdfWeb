@@ -157,9 +157,13 @@ object Triplestore {
             val rdf_object: RDFNode = outgoing_statement.getObject()
 
             val predicate_id: String = subject_short_uri(rdf_predicate)
-            // TODO: "subject_short_uri" gives a "ResourceRequiredException"
-            val object_id: String = "" //subject_short_uri(rdf_object)
+
+            val object_id: String =
+                if (rdf_object.isLiteral()) { "" }
+                else { subject_short_uri(rdf_object) }
+
             val object_label: String = subject_label(rdf_object)
+
             val triple: RdfTriple = new RdfTriple(subject_id, predicate_id, object_id, object_label)
 
             outgoing_triples += triple
