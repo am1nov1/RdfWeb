@@ -11,6 +11,7 @@
 	    <thead>
 	    	<td>Predicate</td>
 	    	<td>Object</td>
+	    	<td>Language</td>
 	    </thead>
 	    <tbody>
 	    @for( t <- subject.outgoing_triples ) {
@@ -24,6 +25,7 @@
 		    		<a href="/subject/@t.object_id">@t.object_label</a>
 		    	}
 	    	</td>
+	    	<td>@t.object_label_language</td>
 	    	</tr>
 	    }
 	    </tbody>
@@ -35,6 +37,7 @@
 	    <thead>
 	    	<td>Predicate</td>
 	    	<td>Object</td>
+	    	<td>Language</td>
 	    </thead>
 	    <tbody>
 	    @for( t <- subject.incoming_triples ) {
@@ -48,6 +51,7 @@
 		    		<a href="/subject/@t.object_id">@t.object_label</a>
 		    	}
 	    	</td>
+	    	<td>@t.object_label_language</td>
 	    	</tr>
 	    }
 	    </tbody>
