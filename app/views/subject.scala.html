@@ -7,29 +7,49 @@
     
     <h3>Outgoing</h3>
     
-    @for( t <- subject.outgoing_triples ) {
- 
-    	<b>@t.predicate_id</b>: 
-
-    	@if( t.object_id.isEmpty ) {
-    		@t.object_label
-    	} else {
-    		<a href="/subject/@t.object_id">@t.object_label</a>
-    	}
-    	<br/>
-    }
+    <table border="1">
+	    <thead>
+	    	<td>Predicate</td>
+	    	<td>Object</td>
+	    </thead>
+	    <tbody>
+	    @for( t <- subject.outgoing_triples ) {
+	 
+	 		<tr>
+	    	<td>@t.predicate_id</td>
+			<td>
+		    	@if( t.object_id.isEmpty ) {
+		    		@t.object_label
+		    	} else {
+		    		<a href="/subject/@t.object_id">@t.object_label</a>
+		    	}
+	    	</td>
+	    	</tr>
+	    }
+	    </tbody>
+    </table>
     
     <h3>Incoming</h3>
     
-    @for( t <- subject.incoming_triples ) {
- 
-    	<b>@t.predicate_id</b>: 
-
-    	@if( t.object_id.isEmpty ) {
-    		@t.object_label
-    	} else {
-    		<a href="/subject/@t.object_id">@t.object_label</a>
-    	}
-    	<br/>
-    }
+    <table border="1">
+	    <thead>
+	    	<td>Predicate</td>
+	    	<td>Object</td>
+	    </thead>
+	    <tbody>
+	    @for( t <- subject.incoming_triples ) {
+	 		
+	 		<tr>
+	    	<td>@t.predicate_id</td>
+			<td>
+		    	@if( t.object_id.isEmpty ) {
+		    		@t.object_label
+		    	} else {
+		    		<a href="/subject/@t.object_id">@t.object_label</a>
+		    	}
+	    	</td>
+	    	</tr>
+	    }
+	    </tbody>
+    </table>
 }
