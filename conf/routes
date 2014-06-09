@@ -2,11 +2,15 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /                           controllers.Application.index
-GET     /html/objects/              controllers.Application.objects
-GET     /html/predicates/           controllers.Application.predicates
-GET     /html/subject/:id           controllers.Application.subject(id: String)
-GET     /html/subjects/             controllers.Application.subjects
+# HTML
+GET     /                           controllers.Application.index_html
+GET     /html/objects/              controllers.Application.objects_html
+GET     /html/predicates/           controllers.Application.predicates_html
+GET     /html/subject/:id           controllers.Application.subject_html(id: String)
+GET     /html/subjects/             controllers.Application.subjects_html
+
+# JSON
+GET     /subject/:id                controllers.Application.subject(id: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
