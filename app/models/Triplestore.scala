@@ -49,16 +49,18 @@ object Triplestore {
     val SKOS_PREFLABEL: Property = model.createProperty(SKOS
         + "prefLabel")
 
+    // Get the name of the RDF file from the confuguration file.
     // TODO: handle the case when the parameter is not defined.
     val rdf_file_name = current.configuration.getString("rdfWeb.rdfFile").getOrElse("")
 
+    // Open the RDF file.
     val rdf_file_input_stream = new FileInputStream(rdf_file_name)
 
-    // Read the RDF files.
+    // Parse the RDF file.
     model.read(rdf_file_input_stream, null, "TTL")
 
     /**
-     * Returns a list of all RDF objects.
+     * Returns a list of all RDF objects in the global RDF model.
      */
     def objects(): Seq[RdfObject] = {
 
@@ -78,7 +80,7 @@ object Triplestore {
     }
 
     /**
-     *
+     * Determines a description for the given RDF subject.
      */
     def subject_description(rdf_subject: RDFNode): String = {
 
@@ -204,7 +206,7 @@ object Triplestore {
     }
 
     /**
-     *
+     * Determines a label for the given RDF subject.
      */
     def subject_label(rdf_subject: RDFNode): String = {
 
@@ -259,7 +261,7 @@ object Triplestore {
     }
 
     /**
-     *
+     * Returns a short URI (e.g. "xx:foo") for the given RDF subject.
      */
     def subject_short_uri(rdf_subject: RDFNode): String = {
         val resource: Resource = rdf_subject.asResource()
@@ -269,13 +271,13 @@ object Triplestore {
     }
 
     /**
-     * Returns a list of all RDF subjects.
+     * Returns a list of all RDF subjects in the global RDF model.
      */
     def subjects(): Seq[String] = {
 
         val subjects: MutableList[String] = new MutableList
 
-        // Iterate over all RDF objects.
+        // Iterate over all RDF subjects.
         for (o <- model.listSubjects()) {
             subjects += o.toString()
         }

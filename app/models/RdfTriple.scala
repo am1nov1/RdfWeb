@@ -11,6 +11,7 @@ class RdfTriple(s_id: String, p_id: String, o_id: String, o_label: String, o_lan
     val object_label_language: String = o_lang
 }
 
+// Enable comparison for sorting of two `RdfTripleOrderingByLabel`.
 object RdfTripleOrderingByLabel extends Ordering[RdfTriple] {
     def compare(a: RdfTriple, b: RdfTriple) = a.predicate_id compare b.predicate_id
 }
