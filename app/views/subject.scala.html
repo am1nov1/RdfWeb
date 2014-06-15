@@ -9,9 +9,9 @@
     
     <table border="1">
 	    <thead>
-	    	<td>Predicate</td>
-	    	<td>Object</td>
-	    	<td>Language</td>
+	    	<th>Predicate</td>
+	    	<th>Object</td>
+	    	<th>Language</td>
 	    </thead>
 	    <tbody>
 	    @for( t <- subject.outgoing_triples ) {
@@ -35,8 +35,8 @@
     
     <table border="1">
 	    <thead>
-	    	<td>Subject</td>
-	    	<td>Predicate</td>
+	    	<th>Subject</td>
+	    	<th>Predicate</td>
 	    </thead>
 	    <tbody>
 	    @for( t <- subject.incoming_triples ) {
@@ -57,7 +57,7 @@
     
     <br/>
     <script>
-	function Ctrl($scope) {
+	function Controller($scope) {
 	    $scope.triples_in =
 	        [
 	        	{"s":"xx:abstract_data_type","p":"rdf:type","o":"xx:graph"},
@@ -68,8 +68,8 @@
 	 }
 	 </script>
 	
-	<div ng-controller="Ctrl">
-	  <table class="friend">
+	<div ng-controller="Controller">
+	  <table class="triplesIn">
 	    <tr>
 	      <th><a href="" ng-click="predicate = 'o'; reverse=!reverse">Subject</a></th>
 	      <th><a href="" ng-click="predicate = 'p'; reverse=!reverse">Predicate</a></th>
