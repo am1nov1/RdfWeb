@@ -57,18 +57,37 @@
     
     <br/>
     <script>
-	function Controller($scope) {
-	    $scope.triples_in =
-	        [
-	        	{"s":"xx:abstract_data_type","p":"rdf:type","o":"xx:graph"},
-	        	{"s":"xx:abstract_data_type","p":"rdf:type","o":"xx:stack"},
-	        	{"s":"xx:abstract_data_type","p":"rdf:type","o":"xx:queue"}
-	        ]
-	    $scope.predicate = '-p';
-	 }
+    	var rdfWebApp = angular.module('rdfWebApp', []);
+    	
+		rdfWebApp.controller('SubjectController', function($scope) {
+		    $scope.triples_in =
+		        [
+		        	{"s":"xx:abstract_data_type","p":"rdf:type","o":"xx:graph"},
+		        	{"s":"xx:abstract_data_type","p":"rdf:type","o":"xx:stack"},
+		        	{"s":"xx:abstract_data_type","p":"rdf:type","o":"xx:queue"}
+		        ]
+		    $scope.predicate = '-p';
+		    
+		    $scope.init = function () {
+		    	// TODO:
+	            /*
+		        $http.get("/subject/@subject.id").
+		        success(
+		        	function(data, status, headers, config) {
+		            	alert(data.in);
+		            	$scope.triples_in = data.in;
+		        	}
+		        ).
+		        error(function(data, status, headers, config) {
+	            	alert("Failure");
+				});
+				*/
+	        };
+	        $scope.init();
+		 });
 	 </script>
 	
-	<div ng-controller="Controller">
+	<div ng-controller="SubjectController">
 	  <table class="triplesIn">
 	    <tr>
 	      <th><a href="" ng-click="predicate = 'o'; reverse=!reverse">Subject</a></th>
