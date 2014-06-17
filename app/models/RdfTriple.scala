@@ -3,13 +3,7 @@ package models
 /**
  * A facade around an RDF triple.
  */
-class RdfTriple(s_id: String, p_id: String, o_id: String, o_label: String, o_lang: String) {
-    val subject_id: String = s_id
-    val predicate_id: String = p_id
-    val object_id: String = o_id
-    val object_label: String = o_label
-    val object_label_language: String = o_lang
-}
+class RdfTriple(val subject_id: String, val predicate_id: String, val object_id: String, val object_label: String, val object_label_language: String)
 
 // Enable comparison for sorting of two `RdfTripleOrderingByLabel`.
 object RdfTripleOrderingByLabel extends Ordering[RdfTriple] {

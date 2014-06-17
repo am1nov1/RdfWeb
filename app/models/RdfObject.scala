@@ -3,10 +3,7 @@ package models
 /**
  * A facade around a RDF subject.
  */
-class RdfObject(i: String, l: String) {
-    val id: String = i
-    val label: String = l
-}
+class RdfObject(val id: String, val label: String)
 
 // Enable comparison for sorting of two `RdfObject`.
 object RdfObjectOrderingByLabel extends Ordering[RdfObject] {

@@ -5,10 +5,4 @@ import play.api.libs.json._
 /**
  * A facade around RDF subject details.
  */
-class RdfSubjectDetails(i: String, l: String, d: String, out: Seq[RdfTriple], in: Seq[RdfTriple]) {
-    val id: String = i
-    val label: String = l
-    val description: String = d
-    val outgoing_triples: Seq[RdfTriple] = out
-    val incoming_triples: Seq[RdfTriple] = in
-}
+class RdfSubjectDetails(val id: String, val label: String, val description: String, val outgoing_triples: Seq[RdfTriple], val incoming_triples: Seq[RdfTriple])
