@@ -1,6 +1,23 @@
 @(subject: RdfSubjectDetails)
 
 @main(subject.label) {
+    
+    <script>
+    	var rdfWebApp = angular.module('rdfWebApp', []);
+    	
+		rdfWebApp.controller('SubjectController', function($scope, $http){
+		    $scope.predicate = '-p';
+		    
+	        $http.get("/subject/@subject.id").
+		        success(function(data, status, headers, config) {
+		            	$scope.triples_in = data.in;
+		        	}
+		        ).
+		        error(function(data, status, headers, config) {
+		        	alert("http failure");
+				});
+        });
+	</script>
 
     <h2>@subject.label (@subject.id)</h2>
     <b>Description</b>: @subject.description <br/>
@@ -32,55 +49,9 @@
     </table>
     
     <h3>Incoming</h3>
-    
-    <table border="1">
-	    <thead>
-	    	<th>Subject</td>
-	    	<th>Predicate</td>
-	    </thead>
-	    <tbody>
-	    @for( t <- subject.incoming_triples ) {
-	 		
-	 		<tr>
-			<td>
-		    	@if( t.object_id.isEmpty ) {
-		    		@t.object_label
-		    	} else {
-		    		<a href="/html/subject/@t.object_id">@t.object_label</a>
-		    	}
-	    	</td>
-	    	<td>@t.predicate_id</td>
-	    	</tr>
-	    }
-	    </tbody>
-    </table>
-    
-    <br/>
-    <script>
-    	var rdfWebApp = angular.module('rdfWebApp', []);
-    	
-		rdfWebApp.controller('SubjectController', function($scope, $http) {
-		    $scope.triples_in =
-		        [
-		        	{"s":"xx:abstract_data_type","p":"rdf:type","o":"xx:graph"},
-		        	{"s":"xx:abstract_data_type","p":"rdf:type","o":"xx:stack"},
-		        	{"s":"xx:abstract_data_type","p":"rdf:type","o":"xx:queue"}
-		        ]
-		    $scope.predicate = '-p';
-		    
-	        $http.get("/subject/@subject.id").
-	        success(function(data, status, headers, config) {
-	            	$scope.triples_in = data.in;
-	        	}
-	        ).
-	        error(function(data, status, headers, config) {
-            	alert("http failure");
-			});
-		 });
-	 </script>
 	
 	<div ng-controller="SubjectController">
-	  <table class="triplesIn">
+	  <table class="table-triples">
 	    <tr>
 	      <th><a href="" ng-click="predicate = 'o'; reverse=!reverse">Subject</a></th>
 	      <th><a href="" ng-click="predicate = 'p'; reverse=!reverse">Predicate</a></th>
