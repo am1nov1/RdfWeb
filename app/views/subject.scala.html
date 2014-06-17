@@ -27,11 +27,13 @@
 	    
 	    <h3>Outgoing</h3>
 	    
-	    <table border="1">
+	    <table class="table-triples">
 		    <thead>
-		    	<th>Predicate</td>
-		    	<th>Object</td>
-		    	<th>Language</td>
+		        <tr>
+		    	    <th>Predicate</td>
+		    	    <th>Object</td>
+		    	    <th>Language</td>
+		    	</tr>
 		    </thead>
 		    <tbody>
 		    @for( t <- subject.outgoing_triples ) {
@@ -54,14 +56,18 @@
 	    <h3>Incoming</h3>
 	
 		<table class="table-triples">
-			<tr>
-				<th><a href="" ng-click="predicate = 'o'; reverse=!reverse">Subject</a></th>
-				<th><a href="" ng-click="predicate = 'p'; reverse=!reverse">Predicate</a></th>
-			</tr>
-			<tr ng-repeat="triple in triples_in | orderBy:predicate:reverse">
-				<td>{{triple.o}}</td>
-				<td>{{triple.p}}</td>
-			</tr>
+		    <thead>
+		        <tr>
+					<th><a href="" ng-click="predicate = 'o'; reverse=!reverse">Subject</a></th>
+					<th><a href="" ng-click="predicate = 'p'; reverse=!reverse">Predicate</a></th>
+		    	</tr>
+		    </thead>
+		    <tbody>
+				<tr ng-repeat="triple in triples_in | orderBy:predicate:reverse">
+					<td>{{triple.o}}</td>
+					<td>{{triple.p}}</td>
+				</tr>
+		    </tbody>
 		</table>
 	</div>
 }
