@@ -19,47 +19,47 @@
         });
 	</script>
 
-    <h2>@subject.label (@subject.id)</h2>
-    <b>Description</b>: @subject.description <br/>
-    
-    <h3>Outgoing</h3>
-    
-    <table border="1">
-	    <thead>
-	    	<th>Predicate</td>
-	    	<th>Object</td>
-	    	<th>Language</td>
-	    </thead>
-	    <tbody>
-	    @for( t <- subject.outgoing_triples ) {
-	 
-	 		<tr>
-	    	<td>@t.predicate_id</td>
-			<td>
-		    	@if( t.object_id.isEmpty ) {
-		    		@t.object_label
-		    	} else {
-		    		<a href="/html/subject/@t.object_id">@t.object_label</a>
-		    	}
-	    	</td>
-	    	<td>@t.object_label_language</td>
-	    	</tr>
-	    }
-	    </tbody>
-    </table>
-    
-    <h3>Incoming</h3>
-	
 	<div ng-controller="SubjectController">
-	  <table class="table-triples">
-	    <tr>
-	      <th><a href="" ng-click="predicate = 'o'; reverse=!reverse">Subject</a></th>
-	      <th><a href="" ng-click="predicate = 'p'; reverse=!reverse">Predicate</a></th>
-	    </tr>
-	    <tr ng-repeat="triple in triples_in | orderBy:predicate:reverse">
-	      <td>{{triple.o}}</td>
-	      <td>{{triple.p}}</td>
-	    </tr>
-	  </table>
+	    <h2>@subject.label (@subject.id)</h2>
+	    <b>Description</b>: @subject.description <br/>
+	    
+	    <h3>Outgoing</h3>
+	    
+	    <table border="1">
+		    <thead>
+		    	<th>Predicate</td>
+		    	<th>Object</td>
+		    	<th>Language</td>
+		    </thead>
+		    <tbody>
+		    @for( t <- subject.outgoing_triples ) {
+		 
+		 		<tr>
+		    	<td>@t.predicate_id</td>
+				<td>
+			    	@if( t.object_id.isEmpty ) {
+			    		@t.object_label
+			    	} else {
+			    		<a href="/html/subject/@t.object_id">@t.object_label</a>
+			    	}
+		    	</td>
+		    	<td>@t.object_label_language</td>
+		    	</tr>
+		    }
+		    </tbody>
+	    </table>
+	    
+	    <h3>Incoming</h3>
+	
+		<table class="table-triples">
+			<tr>
+				<th><a href="" ng-click="predicate = 'o'; reverse=!reverse">Subject</a></th>
+				<th><a href="" ng-click="predicate = 'p'; reverse=!reverse">Predicate</a></th>
+			</tr>
+			<tr ng-repeat="triple in triples_in | orderBy:predicate:reverse">
+				<td>{{triple.o}}</td>
+				<td>{{triple.p}}</td>
+			</tr>
+		</table>
 	</div>
 }
