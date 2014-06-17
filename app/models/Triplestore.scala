@@ -80,6 +80,13 @@ object Triplestore {
     }
 
     /**
+     * Saves the RDF graph.
+     */
+    def save = {
+        // TODO
+    }
+
+    /**
      * Determines a description for the given RDF subject.
      */
     def subject_description(rdf_subject: RDFNode): String = {

@@ -1,16 +1,17 @@
 @(subject: RdfSubjectDetails)
 
 @main(subject.label) {
-    
+
     <script>
     	var rdfWebApp = angular.module('rdfWebApp', []);
     	
-		rdfWebApp.controller('SubjectController', function($scope, $http){
+		rdfWebApp.controller('SubjectController', function($scope, $http) {
 		    $scope.predicate = '-p';
 		    
 	        $http.get("/subject/@subject.id").
 		        success(function(data, status, headers, config) {
 		            	$scope.triples_in = data.in;
+		            	$scope.triples_out = data.out;
 		        	}
 		        ).
 		        error(function(data, status, headers, config) {
@@ -20,6 +21,7 @@
 	</script>
 
 	<div ng-controller="SubjectController">
+
 	    <h2>@subject.label (@subject.id)</h2>
 	    <b>Description</b>: @subject.description <br/>
 	    
