@@ -6,7 +6,7 @@
     	var rdfWebApp = angular.module('rdfWebApp', []);
     	
 		rdfWebApp.controller('SubjectController', function($scope, $http) {
-		    $scope.predicate = '-p';
+		    $scope.predicate = 'o';
 		    
 	        $http.get("/api/subject/@subject.id").
 		        success(function(data, status, headers, config) {
