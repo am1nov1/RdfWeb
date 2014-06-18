@@ -6,11 +6,12 @@
 GET     /api/subject/:id       controllers.Subject.show(id: String)
 
 # HTML
-GET     /                      controllers.Application.index_html
-GET     /objects/              controllers.Application.objects_html
-GET     /predicates/           controllers.Application.predicates_html
-GET     /subject/:id           controllers.Application.subject_html(id: String)
-GET     /subjects/             controllers.Application.subjects_html
+GET     /                      controllers.Application.index
+GET     /objects/              controllers.Application.objects
+GET     /predicates/           controllers.Application.predicates
+GET     /save/                 controllers.Application.save
+GET     /subject/:id           controllers.Application.subject(id: String)
+GET     /subjects/             controllers.Application.subjects
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file          controllers.Assets.at(path="/public", file)
