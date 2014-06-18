@@ -8,7 +8,7 @@
 		rdfWebApp.controller('SubjectController', function($scope, $http) {
 		    $scope.predicate = '-p';
 		    
-	        $http.get("/subject/@subject.id").
+	        $http.get("/api/subject/@subject.id").
 		        success(function(data, status, headers, config) {
 		            	$scope.triples_in = data.in;
 		            	$scope.triples_out = data.out;
@@ -44,7 +44,7 @@
 			    	@if( t.object_id.isEmpty ) {
 			    		@t.object_label
 			    	} else {
-			    		<a href="/html/subject/@t.object_id">@t.object_label</a>
+			    		<a href="/subject/@t.object_id">@t.object_label</a>
 			    	}
 		    	</td>
 		    	<td>@t.object_label_language</td>
@@ -54,7 +54,7 @@
 	    </table>
 	    
 	    <h3>Incoming</h3>
-	
+		
 		<table class="table-triples">
 		    <thead>
 		        <tr>
