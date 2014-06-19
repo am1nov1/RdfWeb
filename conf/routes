@@ -3,6 +3,7 @@
 # ~~~~
 
 # JSON
+#POST    /api/statement/new     controllers.Statement.create
 GET     /api/subject/:id       controllers.Subject.show(id: String)
 
 # HTML
