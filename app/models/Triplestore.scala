@@ -83,7 +83,7 @@ object Triplestore {
      * Saves the RDF graph.
      */
     def save() = {
-        // TODO
+        model.write(new FileOutputStream(rdf_file_name), "TTL")
     }
 
     /**
