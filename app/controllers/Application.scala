@@ -25,7 +25,9 @@ object Application extends Controller {
     }
 
     def save() = Action {
-        // TODO: save
+
+        Triplestore.save()
+
         Ok("Saved")
     }
 

@@ -82,7 +82,7 @@ object Triplestore {
     /**
      * Saves the RDF graph.
      */
-    def save = {
+    def save() = {
         // TODO
     }
 
